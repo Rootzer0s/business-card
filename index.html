@@ -148,32 +148,31 @@
 
   <script>
     function saveContact() {
-      // Single block of contact info for clipboard
-      const contactInfo = `
-Muhammad Mehtab Nazir
-Email: contact.mehtabofficial@gmail.com
-Phone 1: +92 315 5252681
-Phone 2: +92 316 68850517
-Address: House 24, Lane 17a, Gulshan-e-Iqbal Colony, Lalazar 2, Dhamial Road, Rawalpindi, Pakistan
-      `.trim();
+      // Four separate parts for clipboard
+      const name = "Muhammad Mehtab Nazir";
+      const phone1 = "+92 315 5252681";
+      const phone2 = "+92 316 68850517";
+      const address = "House 24, Lane 17a, Gulshan-e-Iqbal Colony, Lalazar 2, Dhamial Road, Rawalpindi, Pakistan";
+
+      // Combine using tabs so mobile apps treat them as separate fields
+      const contactInfo = `${name}\t${phone1}\t${phone2}\t${address}`;
 
       // Copy to clipboard
       navigator.clipboard.writeText(contactInfo).then(() => {
-        alert("Contact info copied to clipboard!");
+        alert("Contact info copied in separate parts!");
       }).catch(err => {
         alert("Failed to copy contact info. Please copy manually.");
         console.error(err);
       });
 
-      // Trigger vCard download for mobile contact creation
+      // Trigger vCard for mobile contacts
       const vCardData = `
 BEGIN:VCARD
 VERSION:3.0
-FN:Muhammad Mehtab Nazir
-TEL;TYPE=CELL:+923155252681
-TEL;TYPE=WORK:+9231668850517
-EMAIL:contact.mehtabofficial@gmail.com
-ADR:;;House 24, Lane 17a, Gulshan-e-Iqbal Colony, Lalazar 2, Dhamial Road, Rawalpindi, Pakistan
+FN:${name}
+TEL;TYPE=CELL:${phone1}
+TEL;TYPE=WORK:${phone2}
+ADR:;;${address}
 END:VCARD
       `.trim();
 
