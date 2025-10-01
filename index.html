@@ -64,7 +64,7 @@
       flex-shrink: 0;
     }
     .contact-info a {
-      color: #1E90FF; /* Blue for clickable contact info */
+      color: #1E90FF;
       text-decoration: none;
       font-weight: 500;
       word-break: break-word;
@@ -105,8 +105,6 @@
     button:hover {
       background: #182848;
     }
-
-    /* Responsive adjustments */
     @media (max-width: 400px) {
       .card {
         padding: 20px;
@@ -149,6 +147,24 @@
 
   <script>
     function saveContact() {
+      const contactInfo = `
+Muhammad Mehtab Nazir
+Email: contact.mehtabofficial@gmail.com
+Phone 1: +92 315 5252681
+Phone 2: +92 316 68850517
+Location: House 24, Lane 17a, Gulshan-e-Iqbal Colony, Lalazar 2, Dhamial Road, Rawalpindi, Pakistan
+WhatsApp: https://wa.me/923155252681?text=Hello%20Mehtab
+      `.trim();
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(contactInfo).then(() => {
+        alert("Contact info copied to clipboard! You can now paste it anywhere.");
+      }).catch(err => {
+        alert("Failed to copy contact info. Please copy manually.");
+        console.error(err);
+      });
+
+      // Also trigger vCard download for mobile contact creation
       const vCardData = `
 BEGIN:VCARD
 VERSION:3.0
