@@ -64,7 +64,7 @@
       flex-shrink: 0;
     }
     .contact-info a {
-      color: #1E90FF;
+      color: #1E90FF; /* Blue for clickable contact info */
       text-decoration: none;
       font-weight: 500;
       word-break: break-word;
@@ -149,7 +149,26 @@
 
   <script>
     function saveContact() {
-      alert("Contact details copied! You can now save them manually.");
+      const vCardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:Muhammad Mehtab Nazir
+TEL;TYPE=CELL:+923155252681
+TEL;TYPE=WORK:+9231668850517
+EMAIL:contact.mehtabofficial@gmail.com
+ADR:;;House 24, Lane 17a, Gulshan-e-Iqbal Colony, Lalazar 2, Dhamial Road, Rawalpindi, Pakistan
+END:VCARD
+      `.trim();
+
+      const blob = new Blob([vCardData], { type: 'text/vcard' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Muhammad-Mehtab-Nazir.vcf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     }
   </script>
 </body>
